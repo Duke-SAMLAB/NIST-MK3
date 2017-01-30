@@ -1,0 +1,14 @@
+[Unit]
+Description=NIST MK3 Recording Service
+After=multi-user.target
+
+[Service]
+Type=forking
+ExecStart=/bin/bash /home/pi/start.sh
+ExecStop=/bin/bash /home/pi/stop.sh
+User=pi
+Group=users
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
