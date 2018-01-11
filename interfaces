@@ -12,13 +12,9 @@ iface lo inet loopback
 iface eth0 inet static
 address 10.0.0.1
 netmask 255.255.255.0
-gateway 10.0.0.255
+gateway 10.0.0.1
 
 auto wlan0
-iface wlan0 inet static
-    address 10.0.1.1
-    netmask 255.255.255.0
-    wireless-channel 1
-    wireless-essid arraypi
-    wireless-mode ad-hoc
-    wireless-key arraypiraspberry
+iface wlan0 inet manual
+allow-hotplug wlan0
+  wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
