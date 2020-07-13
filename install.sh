@@ -12,6 +12,9 @@ echo "Configuring DHCPD service to interface with array"
 sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf
 sudo cp isc-dhcp-server /etc/default/isc-dhcp-server
 sudo cp wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
+sudo /etc/init.d/networking reload
+sudo systemctl daemon-reload
+sudo /etc/init.d/networking restart
 sudo service isc-dhcp-server restart
 
 echo "Adding recording service as a daemon service"
