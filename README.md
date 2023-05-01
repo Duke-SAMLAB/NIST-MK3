@@ -3,8 +3,8 @@ Scripts and configuration files to setup a Raspberry Pi to interface with the NI
 
 Run install.sh on Raspberry Pi to install. Here is a brief description of each file:
 
--`cma24b_to_intel32b` NIST program convert to binary
--`dhcpd.conf` DHCP server configuration file
+-`cma24b_to_intel32b` NIST program convert to binary <br>
+-`dhcpd.conf` DHCP server configuration file <br>
 -`install.sh` installation shell script
 -`interfaces` network interfaces calling network configuration
 -`isc-dhcp-server` DHCP server installation
