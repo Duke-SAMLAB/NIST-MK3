@@ -16,8 +16,44 @@ To do bulk transfers of data from the Pi to a separate computer, it is recommend
 `stop.sh` depricated recording stop shell script, now done in jupyter notebook, <br>
 `wpa_supplicant.conf` configure to use SAM wifi <br>
 
-## Installation
-To do a fresh installation on a new Pi, clone this repo and simply run `install.sh`. This script will set up the network interfaces required for the Pi to interface with the NIST-MK3 as well  as your local computer over the SAMLAB wifi network.
+## Pi Setup and Installation
+### OS Image
+Currently we are running on a Raspberry Pi 3B+ which is kind of old. As for the OS image, use a Debian 11 (bullseye) image, NOT a Debian 12 (bookworm). Links below:
+https://raspi.debian.net/tested-images/
+Currently we are using the 2023.01.02	release TODO: check that this works!
+
+Download the Rpi imaging tool and follow these instructions:
+https://www.tomshardware.com/reviews/raspberry-pi-headless-setup-how-to,6028.html
+Be sure to enable SSH access as well.
+
+### Old method of imaging
+Once you have downloaded the image, on your local machine, insert a micro SD card, and image it with the downloaded .img file. On a linux machine, you will need to unpack the image first:
+
+`xz -d MYIMAGE `
+
+Then, once you have the extracted image, you can image your SD card. First, verify where your SD card is mounted to with:
+
+`sudo fdisk -l`
+
+Once you've found the mount point, which should be something like `/dev/sdX` where `X` could be 'a' or 'b' or something else. Verify that the size of this is what you expect the SD card size to be! Now, you are ready to image with:
+
+`sudo dd bs=4M if=/path/to/image of=/dev/sdX`
+
+where again, replace `X` with whatever you found with `fdisk -l`. This may take a minute or two. Once it is done, safely eject the SD card and reinsert it. You should see a new folder pop up titled 'bootfs' or something like that. To enable SSH, create a file called `ssh` in that home directory:
+
+`touch /path/to/bootfs/ssh`
+
+Finally, copy the contents of this repo to the home folder:
+
+## Install NIST MK3 Software on Pi
+Once you have a fresh Pi install, you have a few options to get the NIST software working:
+
+1. Clone this repo and simply run `install.sh`. The downside is you will have to provide your github credentials on the Pi.
+2. Directly write this repo to the SD card using `cd /path/to/NIST-MK3 && cp ./* /path/to/rootfs/home/pi`
+
+The `install.sh` script will set up the network interfaces required for the Pi to interface with the NIST-MK3 as well  as your local computer over the SAMLAB wifi network.
 
 ## Running Data Collection
-1. Begin by `ssh`ing into the Pi and launching a jupyter notebook
+1. Begin by turning on the Pi, connecting it via Ethernet to the NIST MK3 FPGA board.
+2. If you know the hostname or the IP address of the Pi, connect to the Jupyter Notebook it is running from your browser at `https://PIHOSTNAME:8888`
+3.
