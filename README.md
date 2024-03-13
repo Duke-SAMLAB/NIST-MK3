@@ -61,5 +61,6 @@ Then run:
 `systemctl restart jupyter
 ## Running Data Collection
 1. Begin by turning on the Pi, connecting it via Ethernet to the NIST MK3 FPGA board.
-2. If you know the hostname or the IP address of the Pi, connect to the Jupyter Notebook it is running from your browser at `https://PIHOSTNAME:8888`
-3.
+2. SSH into the NIST MK3 and run `jupyter notebook --ip 0.0.0.0`
+3. Connect to the Jupyter Notebook from your local computer with your browser at `https://PIHOSTNAME:8888`
+4. Open the notebook `NIST_MK3.ipynb`
