@@ -1,0 +1,19 @@
+# After Ubuntu 16.04, Systemd becomes the default.
+# It is simpler than https://gist.github.com/Doowon/38910829898a6624ce4ed554f082c4dd
+
+[Unit]
+Description=Jupyter Notebook
+
+[Service]
+Type=simple
+PIDFile=/run/jupyter.pid
+ExecStart=/usr/local/bin/jupyter-notebook --config=/home/pi/.jupyter/jupyter_notebook_config.py
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/record
+Restart=always
+RestartSec=10
+#KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
