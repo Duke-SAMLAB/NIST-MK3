@@ -52,7 +52,13 @@ Once you have a fresh Pi install, you have a few options to get the NIST softwar
 2. Directly write this repo to the SD card using `cd /path/to/NIST-MK3 && cp ./* /path/to/rootfs/home/pi`
 
 The `install.sh` script will set up the network interfaces required for the Pi to interface with the NIST-MK3 as well  as your local computer over the SAMLAB wifi network.
+Parts of this script may not run automatically, it may need some babysitting.
 
+Once this has run, verify that you can launch the jupyter notebook server. First use:
+`jupyter notebook password`
+to set the password.
+Then run:
+`systemctl restart jupyter
 ## Running Data Collection
 1. Begin by turning on the Pi, connecting it via Ethernet to the NIST MK3 FPGA board.
 2. If you know the hostname or the IP address of the Pi, connect to the Jupyter Notebook it is running from your browser at `https://PIHOSTNAME:8888`
