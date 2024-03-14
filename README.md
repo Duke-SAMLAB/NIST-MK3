@@ -26,7 +26,19 @@ Currently we are using the 2023.01.02	release TODO: check that this works!
 
 Download the Rpi imaging tool and follow these instructions:
 https://www.tomshardware.com/reviews/raspberry-pi-headless-setup-how-to,6028.html
-Be sure to enable SSH access as well.
+
+Please use the following parameters in the General tab:
+hostname: nistmk3
+username: pi
+password: DEFAULT / YOUCHOOSE
+Check configure wireless LAN with
+SSID: samlab
+password: DEFAULT
+Check set locale settings and set to America / New York
+
+Check Enable SSH with Use Password Authentication option in the Services tab
+
+Hit save and continue to image the disk. This should be it! 
 
 ### Old method of imaging
 Once you have downloaded the image, on your local machine, insert a micro SD card, and image it with the downloaded .img file. On a linux machine, you will need to unpack the image first:
