@@ -1,0 +1,99 @@
+SHELL = /bin/sh
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+MK3LIB_PATH=../mk3lib
+
+PROG1 = mk3osc
+PROG2 = sf_mk3osc
+PROGS = ${PROG1} ${PROG2} mk3osc_22K mk3osc_44K \
+	sf_mk3osc_5f_22K sf_mk3osc_10f_22K sf_mk3osc_20f_22K sf_mk3osc_100f_22K \
+	sf_mk3osc_5f_44K sf_mk3osc_10f_44K sf_mk3osc_20f_44K sf_mk3osc_100f_44K
+ALLINC = `sdl-config --cflags` 
+ALLLIB = `sdl-config --libs` -lSDL_mixer
+DEPLIB = ${MK3LIB_PATH}/libmk3lib.a
+
+SRCS1 = mk3osc.c draw.c font.c
+OBJS1 = mk3osc.o draw.o font.o
+P1DEF = -D DO_MK3
+INC1   = -I${srcdir}/${MK3LIB_PATH}
+LIB1	= -L${MK3LIB_PATH} -lmk3lib
+
+SRCS2 = mk3osc.c draw.c font.c
+OBJS2 = sf_mk3osc.o draw.o font.o
+P2DEF = -D DO_SF
+INC2   = -I${srcdir}/../../../../@SFLIB@ \
+	-I${srcdir}/../../../AudioDisplay/sources/gtk_display
+LIB2	= -L../../../../@SFLIB@ -lsflib
+
+
+HDRS = draw.h font.h
+
+LN=ln -s
+
+CC=@CC@
+CXX=@CXX@
+CFLAGS=@CFLAGS@
+CXXFLAGS=@CXXFLAGS@
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+
+BINDIR=@bindir@
+LIBDIR=@libdir@
+INCDIR=@includedir@
+
+all: ${PROGS}
+
+.SUFFIXES: .cc .hh .o .a
+
+mk3osc_22K: ${PROG1}
+	${LN} $< $@
+
+mk3osc_44K: ${PROG1}
+	${LN} $< $@
+
+mk3osc.o: mk3osc.c
+	${CC} -c ${CFLAGS} ${DEF} ${P1DEF} ${ALLINC} ${INC1} $< -o $@
+
+${PROG1}: ${OBJS1} ${DEPLIB} font.o
+	${CC} ${CFLAGS} ${OBJS1} ${ALLLIB} ${LIB1} -o ${PROG1}
+
+sf_mk3osc_5f_22K: ${PROG2}
+	${LN} $< $@
+
+sf_mk3osc_10f_22K: ${PROG2}
+	${LN} $< $@
+
+sf_mk3osc_20f_22K: ${PROG2}
+	${LN} $< $@
+
+sf_mk3osc_100f_22K: ${PROG2}
+	${LN} $< $@
+
+sf_mk3osc_5f_44K: ${PROG2}
+	${LN} $< $@
+
+sf_mk3osc_10f_44K: ${PROG2}
+	${LN} $< $@
+
+sf_mk3osc_20f_44K: ${PROG2}
+	${LN} $< $@
+
+sf_mk3osc_100f_44K: ${PROG2}
+	${LN} $< $@
+
+sf_mk3osc.o: mk3osc.c
+	${CC} -c ${CFLAGS} ${DEF} ${P2DEF} ${ALLINC} ${INC2} $< -o $@
+
+${PROG2}: ${OBJS2} ${DEPLIB} font.o
+	${CC} ${CFLAGS} ${OBJS2} ${ALLLIB} ${LIB2} -o ${PROG2}
+
+clean:
+	rm -f ${PROGS} *.o
+
+distclean:
+	rm -f ${PROGS} *.o Makefile
+
+.c.o:
+	${CC} -c ${CFLAGS} ${DEFS} ${ALLINC} $<

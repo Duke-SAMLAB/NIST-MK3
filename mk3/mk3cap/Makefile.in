@@ -1,0 +1,110 @@
+SHELL = /bin/sh
+srcdir = @srcdir@
+VPATH = @srcdir@
+TOOL_PATH = /home/tools
+SFFILE_PATH=../../../../Infrastructure/sources/sffile
+MK3LIB_PATH=../mk3lib
+
+ALLINC = -I${srcdir}/../../../../@SFLIB@ -I${srcdir}/${SFFILE_PATH} \
+	 -I${srcdir}/../../../AudioDisplay/sources/gtk_display \
+	 -I${srcdir}/${MK3LIB_PATH}
+
+ALLLIB1 = -L../../../../@SFLIB@ -lsflib -L${SFFILE_PATH} -lsffile -lpthread
+ALLLIB2 = ${ALLLIB1} -L${MK3LIB_PATH} -lmk3lib
+ALLLIB3 = ${ALLLIB2}
+
+DEPLIB1 = ../../../../@SFLIB@/libsflib.a ${SFFILE_PATH}/libsffile.a
+DEPLIB2 = ${DEPLIB1} ${MK3LIB_PATH}/libmk3lib.a
+DEPLIB3 = ${DEPLIB2}
+
+PROG  = mk3cap
+
+PROG1 = mk3cap_self
+PROG2 = mk3cap_lib_get
+PROG3 = mk3cap_lib_cursor
+
+PROGS = ${PROG1} ${PROG2} ${PROG3} mk3cap_5f_22K mk3cap_10f_22K mk3cap_20f_22K mk3cap_100f_22K mk3cap_22K mk3cap_5f_44K mk3cap_10f_44K mk3cap_20f_44K mk3cap_100f_44K mk3cap_44K
+
+OBJS1 = mk3cap_self.o
+SRCS1 = mk3cap_self.c
+
+OBJS2 = mk3cap_lib_get.o
+SRCS2 = mk3cap_lib_get.c
+
+OBJS3 = mk3cap_lib_cursor.o
+SRCS3 = mk3cap_lib_cursor.c
+
+OBJS = $(OBJS1) $(OBJS2) $(OBJS3)
+HDRS =
+
+LN=ln -s
+
+CC=@CC@
+CXX=@CXX@
+CFLAGS=@CFLAGS@ -D_THREAD_SAFE
+CXXFLAGS=@CXXFLAGS@
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+
+BINDIR=@bindir@
+LIBDIR=@libdir@
+INCDIR=@includedir@
+
+all: ${PROGS}
+
+.SUFFIXES: .cc .hh .o .a
+
+mk3cap_5f_22K: ${PROG}
+	${LN} ${PROG} $@
+
+mk3cap_10f_22K: ${PROG}
+	${LN} ${PROG} $@
+
+mk3cap_20f_22K: ${PROG}
+	${LN} ${PROG} $@
+
+mk3cap_100f_22K: ${PROG}
+	${LN} ${PROG} $@
+
+mk3cap_22K: ${PROG}
+	${LN} ${PROG} $@
+
+mk3cap_5f_44K: ${PROG}
+	${LN} ${PROG} $@
+
+mk3cap_10f_44K: ${PROG}
+	${LN} ${PROG} $@
+
+mk3cap_20f_44K: ${PROG}
+	${LN} ${PROG} $@
+
+mk3cap_100f_44K: ${PROG}
+	${LN} ${PROG} $@
+
+mk3cap_44K: ${PROG}
+	${LN} ${PROG} $@
+
+${PROG1}: ${OBJS1} ${DEPLIB1}
+	${CC} ${CFLAGS} ${OBJS1} ${ALLLIB1} ${DEPLIB1} -o ${PROG1}
+
+${PROG2}: ${OBJS2} ${DEPLIB2}
+	${CC} ${CFLAGS} ${OBJS2} ${ALLLIB2} ${DEPLIB2} -o ${PROG2}
+
+${PROG3}: ${OBJS3} ${DEPLIB3}
+	${CC} ${CFLAGS} ${OBJS3} ${ALLLIB3} ${DEPLIB3} -o ${PROG3}
+
+${PROG}: ${PROG3}
+	${LN} $< $@
+
+clean:
+	-rm -f $(PROG) ${PROGS} ${OBJS}
+
+distclean:
+	-rm -f $(PROG) ${PROGS} ${OBJS} Makefile
+
+.c.o:
+	${CC} -c ${CFLAGS} ${DEFS} ${ALLINC} $<
+
+.cc.o:
+	${CXX} -c ${CXXFLAGS} ${DEFS}  $<

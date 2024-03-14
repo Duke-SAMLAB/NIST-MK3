@@ -1,0 +1,2 @@
+First compile the mk3library. It is used by the mk3oscilloscope and the mk3cap programs.
+mk3normalize is not using the library see the COMPILE file in the mk3normalize folder for more information.
