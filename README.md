@@ -1,7 +1,9 @@
 # NIST-MK3 Overview
 This repository contains software to put on a Raspberry Pi to run the NIST-MK3 microphone array as well as basic scripts to import the data and plot a spectrogram.
 The Raspberry Pi interfaces with the NIST over an Ethernet interface with a static IP address. To talk to the Raspberry Pi then requires a connection over a separate interface, i.e. the WLAN.
-The software interface to the Raspberry Pi is done using a Jupyter Notebook. This contains the necessary code to start data collects, play back audio, and do basic plots to sanity check the data.
+The software interface to the Raspberry Pi is done using a Jupyter Notebook. 
+
+This repo contains the necessary code to start data collects, play back audio, and do basic plots to sanity check the data.
 For small data transfers, it is recommended to `scp` the data from Pi to your local computer.
 To do bulk transfers of data from the Pi to a separate computer, it is recommended to remove the SD card from the Pi, plug it into your computer and transfer data this way.
 
