@@ -1,7 +1,9 @@
 # NIST-MK3 Overview
 This repository contains software to put on a Raspberry Pi to run the NIST-MK3 microphone array as well as basic scripts to import the data and plot a spectrogram.
 The Raspberry Pi interfaces with the NIST over an Ethernet interface with a static IP address. To talk to the Raspberry Pi then requires a connection over a separate interface, i.e. the WLAN.
-The software interface to the Raspberry Pi is done using a Jupyter Notebook. This contains the necessary code to start data collects, play back audio, and do basic plots to sanity check the data.
+The software interface to the Raspberry Pi is done using a Jupyter Notebook. 
+
+This repo contains the necessary code to start data collects, play back audio, and do basic plots to sanity check the data.
 For small data transfers, it is recommended to `scp` the data from Pi to your local computer.
 To do bulk transfers of data from the Pi to a separate computer, it is recommended to remove the SD card from the Pi, plug it into your computer and transfer data this way.
 
@@ -17,14 +19,28 @@ To do bulk transfers of data from the Pi to a separate computer, it is recommend
 `wpa_supplicant.conf` configure to use SAM wifi <br>
 
 ## Pi Setup and Installation
-### OS Image
+### Creating the Rapsberry Pi OS Image
 Currently we are running on a Raspberry Pi 3B+ which is kind of old. As for the OS image, use a Debian 11 (bullseye) image, NOT a Debian 12 (bookworm). Links below:
+
 https://raspi.debian.net/tested-images/
 Currently we are using the 2023.01.02	release TODO: check that this works!
 
 Download the Rpi imaging tool and follow these instructions:
+
 https://www.tomshardware.com/reviews/raspberry-pi-headless-setup-how-to,6028.html
-Be sure to enable SSH access as well.
+
+Please use the following parameters in the General tab:
+hostname: nistmk3
+username: pi
+password: DEFAULT / YOUCHOOSE
+Check configure wireless LAN with
+SSID: samlab
+password: DEFAULT
+Check set locale settings and set to America / New York
+
+Check Enable SSH with Use Password Authentication option in the Services tab
+
+Hit save and continue to image the disk. This should be it! 
 
 ### Old method of imaging
 Once you have downloaded the image, on your local machine, insert a micro SD card, and image it with the downloaded .img file. On a linux machine, you will need to unpack the image first:
@@ -61,5 +77,6 @@ Then run:
 `systemctl restart jupyter
 ## Running Data Collection
 1. Begin by turning on the Pi, connecting it via Ethernet to the NIST MK3 FPGA board.
-2. If you know the hostname or the IP address of the Pi, connect to the Jupyter Notebook it is running from your browser at `https://PIHOSTNAME:8888`
-3.
+2. SSH into the NIST MK3 and run `jupyter notebook --ip 0.0.0.0`
+3. Connect to the Jupyter Notebook from your local computer with your browser at `https://PIHOSTNAME:8888`
+4. Open the notebook `NIST_MK3.ipynb`
