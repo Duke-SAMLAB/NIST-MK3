@@ -19,12 +19,14 @@ To do bulk transfers of data from the Pi to a separate computer, it is recommend
 `wpa_supplicant.conf` configure to use SAM wifi <br>
 
 ## Pi Setup and Installation
-### OS Image
+### Creating the Rapsberry Pi OS Image
 Currently we are running on a Raspberry Pi 3B+ which is kind of old. As for the OS image, use a Debian 11 (bullseye) image, NOT a Debian 12 (bookworm). Links below:
+
 https://raspi.debian.net/tested-images/
 Currently we are using the 2023.01.02	release TODO: check that this works!
 
 Download the Rpi imaging tool and follow these instructions:
+
 https://www.tomshardware.com/reviews/raspberry-pi-headless-setup-how-to,6028.html
 
 Please use the following parameters in the General tab:
