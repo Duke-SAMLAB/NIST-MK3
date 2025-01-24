@@ -13,7 +13,7 @@ wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-armv7l.sh
 ~/miniconda3/bin/conda init bash
 pip install jupyter
 
-curl -O https://www.nist.gov/sites/default/files/documents/itl/iad/mig/smartspace/mk3.zip
+curl -O https://www.nist.gov/document/mk3zip
 unzip mk3.zip
 sudo echo "export PATH=$PATH:/home/pi/mk3/mk3cap" >> /home/pi/.bashrc
 sudo bash /home/pi/.bashrc
